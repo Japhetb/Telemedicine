@@ -6,16 +6,17 @@ defmodule TelemedicineWeb.DoctorView do
     %{data: render_many(doctors, DoctorView, "doctor.json")}
   end
 
-  def render("show.json", %{doctor: doctor}) do
-    %{data: render_one(doctor, DoctorView, "doctor.json")}
-  end
+  # def render("show.json", %{doctor: doctor}) do
+  #   %{data: render_one(doctor, DoctorView, "doctor.json")}
+  # end
 
-  def render("doctor.json", %{doctor: doctor}) do
+  def render("show.json", %{doctor: doctor, token: token}) do
     %{
       id: doctor.id,
       email: doctor.email,
       username: doctor.username,
-      password_hash: doctor.password_hash
+      password_hash: doctor.password_hash,
+      token: token
     }
   end
 end

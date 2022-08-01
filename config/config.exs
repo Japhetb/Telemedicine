@@ -37,6 +37,10 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+config :telemedicine, TelemedicineWeb.Auth.Guardian,
+       issuer: "telemedicine",
+       secret_key: "Xc//22PU+PeQm9Fqlf1YGpkNp74kDCQmYA3/ZyzxNVQa+0UFSDJrGOSg2XqbB1bl"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

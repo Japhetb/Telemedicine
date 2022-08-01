@@ -21,34 +21,17 @@ defmodule Telemedicine.Medical_stuff do
     Repo.all(Doctor)
   end
 
-  @doc """
-  Gets a single doctor.
+  def get_by_email(email) do
+    case Repo.get_by(Doctor, email: email) do
+      nil ->
+        {:error, :not_found}
+      doctor ->
+        {:ok, doctor}
+    end
+  end
 
-  Raises `Ecto.NoResultsError` if the Doctor does not exist.
-
-  ## Examples
-
-      iex> get_doctor!(123)
-      %Doctor{}
-
-      iex> get_doctor!(456)
-      ** (Ecto.NoResultsError)
-
-  """
   def get_doctor!(id), do: Repo.get!(Doctor, id)
 
-  @doc """
-  Creates a doctor.
-
-  ## Examples
-
-      iex> create_doctor(%{field: value})
-      {:ok, %Doctor{}}
-
-      iex> create_doctor(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
   def create_doctor(attrs \\ %{}) do
     %Doctor{}
     |> Doctor.changeset(attrs)

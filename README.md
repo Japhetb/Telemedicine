@@ -17,3 +17,8 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Docs: https://hexdocs.pm/phoenix
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
+
+  https://pamit.medium.com/building-a-restful-backend-with-elixir-phoenix-84fe390975c
+
+  https://prograils.com/python-in-elixir
+  

@@ -3,6 +3,7 @@ defmodule TelemedicineWeb.DoctorController do
 
   alias Telemedicine.Medical_stuff
   alias Telemedicine.Medical_stuff.Doctor
+  alias TelemedicineWeb.Auth.Guardian
 
   action_fallback TelemedicineWeb.FallbackController
 
@@ -11,12 +12,12 @@ defmodule TelemedicineWeb.DoctorController do
     render(conn, "index.json", doctors: doctors)
   end
 
-  def create(conn, %{"doctor" => doctor_params}) do
-    with {:ok, %Doctor{} = doctor} <- Medical_stuff.create_doctor(doctor_params) do
+  def create(conn, doctor_params) do
+    with {:ok, %Doctor{} = doctor} <- Medical_stuff.create_doctor(doctor_params), {:ok, token, _claims} <- Guardian.encode_and_sign(doctor) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.doctor_path(conn, :show, doctor))
-      |> render("show.json", doctor: doctor)
+      |> render("show.json", doctor: doctor, token: token)
     end
   end
 
@@ -25,19 +26,27 @@ defmodule TelemedicineWeb.DoctorController do
     render(conn, "show.json", doctor: doctor)
   end
 
-  def update(conn, %{"id" => id, "doctor" => doctor_params}) do
-    doctor = Medical_stuff.get_doctor!(id)
-
-    with {:ok, %Doctor{} = doctor} <- Medical_stuff.update_doctor(doctor, doctor_params) do
-      render(conn, "show.json", doctor: doctor)
+  def signin(conn, %{"email" => email, "password" => password}) do
+    with {:ok, doctor, token} <- Guardian.authenticate(email, password) do
+      conn
+      |> put_status(:created)
+      |> send_resp(200, "")
     end
   end
 
-  def delete(conn, %{"id" => id}) do
-    doctor = Medical_stuff.get_doctor!(id)
+  # def update(conn, %{"id" => id, "doctor" => doctor_params}) do
+  #   doctor = Medical_stuff.get_doctor!(id)
 
-    with {:ok, %Doctor{}} <- Medical_stuff.delete_doctor(doctor) do
-      send_resp(conn, :no_content, "")
-    end
-  end
+  #   with {:ok, %Doctor{} = doctor} <- Medical_stuff.update_doctor(doctor, doctor_params) do
+  #     render(conn, "show.json", doctor: doctor)
+  #   end
+  # end
+
+  # def delete(conn, %{"id" => id}) do
+  #   doctor = Medical_stuff.get_doctor!(id)
+
+  #   with {:ok, %Doctor{}} <- Medical_stuff.delete_doctor(doctor) do
+  #     send_resp(conn, :no_content, "")
+  #   end
+  # end
 end

@@ -2,12 +2,21 @@ defmodule TelemedicineWeb.Router do
   use TelemedicineWeb, :router
 
   pipeline :api do
+    plug CORSPlug
     plug :accepts, ["json"]
+  end
+
+  pipeline :auth do
+    plug TelemedicineWeb.Auth.Pipeline
+  end
+
+  scope "/api", TelemedicineWeb do
+    pipe_through [:api, :auth]
+    resources "/doctors", DoctorController, except: [:new, :edit]
   end
 
   scope "/api", TelemedicineWeb do
     pipe_through :api
-    # resources "/doctors", DoctorController, except: [:new, :edit]
     post "/doctors/signup", DoctorController, :create
     post "/doctors/signin", DoctorController, :signin
   end
