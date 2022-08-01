@@ -47,7 +47,8 @@ defmodule Telemedicine.MixProject do
       {:guardian, "~> 2.2"},
       {:bcrypt_elixir, "~> 3.0"},
       {:comeonin, "~> 5.3"},
-      {:cors_plug, "~> 3.0"}
+      {:cors_plug, "~> 3.0"},
+      {:poison, "~> 5.0"}
     ]
   end
 

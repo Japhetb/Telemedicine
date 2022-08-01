@@ -27,7 +27,7 @@ defmodule TelemedicineWeb.DoctorController do
   end
 
   def signin(conn, %{"email" => email, "password" => password}) do
-    with {:ok, doctor, token} <- Guardian.authenticate(email, password) do
+    with {:ok, _doctor, _token} <- Guardian.authenticate(email, password) do
       conn
       |> put_status(:created)
       |> send_resp(200, "")
