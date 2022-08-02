@@ -13,6 +13,7 @@ defmodule TelemedicineWeb.Router do
   scope "/api", TelemedicineWeb do
     pipe_through [:api, :auth]
     resources "/doctors", DoctorController, except: [:new, :edit]
+    resources "/patients", PatientController, except: [:new, :edit]
   end
 
   scope "/api", TelemedicineWeb do
