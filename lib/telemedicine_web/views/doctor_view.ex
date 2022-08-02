@@ -15,8 +15,15 @@ defmodule TelemedicineWeb.DoctorView do
       user_id: doctor.id,
       email: doctor.email,
       username: doctor.username,
-      password_hash: doctor.password_hash,
       token: token
+    }
+  end
+
+  def render("created.json", %{doctor: doctor}) do
+    %{
+      user_id: doctor.id,
+      email: doctor.email,
+      username: doctor.username
     }
   end
 end
