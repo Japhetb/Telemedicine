@@ -25,6 +25,6 @@ defmodule TelemedicineWeb.FallbackController do
   def call(conn, {:error, :unauthorized}) do
     conn
     |> put_status(:unauthorized)
-    |> render(BusiApiWeb.ErrorView, :"401")
+    |> render(TelemedicineWeb.ErrorView, :"401")
   end
 end

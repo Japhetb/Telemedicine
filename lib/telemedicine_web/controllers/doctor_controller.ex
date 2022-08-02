@@ -13,12 +13,11 @@ defmodule TelemedicineWeb.DoctorController do
   end
 
   def create(conn, doctor_params) do
-    with {:ok, %Doctor{} = doctor} <- Medical_stuff.create_doctor(doctor_params),
-         {:ok, token, _claims} <- Guardian.encode_and_sign(doctor) do
+    with {:ok, %Doctor{} = doctor} <- Medical_stuff.create_doctor(doctor_params) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.doctor_path(conn, :show, doctor))
-      |> render("show.json", doctor: doctor, token: token)
+      |> render("show.json", doctor: doctor)
     end
   end
 
@@ -28,10 +27,10 @@ defmodule TelemedicineWeb.DoctorController do
   end
 
   def signin(conn, %{"email" => email, "password" => password}) do
-    with {:ok, _doctor, _token} <- Guardian.authenticate(email, password) do
+    with {:ok, doctor, token} <- Guardian.authenticate(email, password) do
       conn
       |> put_status(:created)
-      |> send_resp(200, "")
+      |> render("show.json", doctor: doctor, token: token)
     end
   end
 
