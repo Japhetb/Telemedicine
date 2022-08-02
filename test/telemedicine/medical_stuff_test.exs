@@ -21,7 +21,11 @@ defmodule Telemedicine.Medical_stuffTest do
     end
 
     test "create_doctor/1 with valid data creates a doctor" do
-      valid_attrs = %{email: "some email", password_hash: "some password_hash", username: "some username"}
+      valid_attrs = %{
+        email: "some email",
+        password_hash: "some password_hash",
+        username: "some username"
+      }
 
       assert {:ok, %Doctor{} = doctor} = Medical_stuff.create_doctor(valid_attrs)
       assert doctor.email == "some email"
@@ -35,7 +39,12 @@ defmodule Telemedicine.Medical_stuffTest do
 
     test "update_doctor/2 with valid data updates the doctor" do
       doctor = doctor_fixture()
-      update_attrs = %{email: "some updated email", password_hash: "some updated password_hash", username: "some updated username"}
+
+      update_attrs = %{
+        email: "some updated email",
+        password_hash: "some updated password_hash",
+        username: "some updated username"
+      }
 
       assert {:ok, %Doctor{} = doctor} = Medical_stuff.update_doctor(doctor, update_attrs)
       assert doctor.email == "some updated email"

@@ -24,11 +24,11 @@ defmodule Telemedicine.Medical_stuff.Doctor do
 
   defp put_hashed_password(changeset) do
     case changeset do
-      %Ecto.Changeset{valid?: true, changes: %{password: password}}
-        ->
-          put_change(changeset, :password_hash, Bcrypt.hash_pwd_salt(password))
+      %Ecto.Changeset{valid?: true, changes: %{password: password}} ->
+        put_change(changeset, :password_hash, Bcrypt.hash_pwd_salt(password))
+
       _ ->
-          changeset
+        changeset
     end
   end
 end

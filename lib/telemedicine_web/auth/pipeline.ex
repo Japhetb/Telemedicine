@@ -1,5 +1,6 @@
 defmodule TelemedicineWeb.Auth.Pipeline do
-  use Guardian.Plug.Pipeline, otp_app: :telemedicine,
+  use Guardian.Plug.Pipeline,
+    otp_app: :telemedicine,
     module: TelemedicineWeb.Auth.Guardian,
     error_handler: TelemedicineWeb.Auth.ErrorHandler
 

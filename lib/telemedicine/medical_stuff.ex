@@ -25,6 +25,7 @@ defmodule Telemedicine.Medical_stuff do
     case Repo.get_by(Doctor, email: email) do
       nil ->
         {:error, :not_found}
+
       doctor ->
         {:ok, doctor}
     end
