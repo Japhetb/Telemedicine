@@ -8,7 +8,15 @@ defmodule Telemedicine.AccountsTest do
 
     import Telemedicine.AccountsFixtures
 
-    @invalid_attrs %{date_of_birth: nil, first_name: nil, gender: nil, id_birth_cert: nil, last_name: nil, location: nil, profile_image: nil}
+    @invalid_attrs %{
+      date_of_birth: nil,
+      first_name: nil,
+      gender: nil,
+      id_birth_cert: nil,
+      last_name: nil,
+      location: nil,
+      profile_image: nil
+    }
 
     test "list_patients/0 returns all patients" do
       patient = patient_fixture()
@@ -21,7 +29,15 @@ defmodule Telemedicine.AccountsTest do
     end
 
     test "create_patient/1 with valid data creates a patient" do
-      valid_attrs = %{date_of_birth: ~U[2022-08-01 10:39:00Z], first_name: "some first_name", gender: "some gender", id_birth_cert: "some id_birth_cert", last_name: "some last_name", location: "some location", profile_image: "some profile_image"}
+      valid_attrs = %{
+        date_of_birth: ~U[2022-08-01 10:39:00Z],
+        first_name: "some first_name",
+        gender: "some gender",
+        id_birth_cert: "some id_birth_cert",
+        last_name: "some last_name",
+        location: "some location",
+        profile_image: "some profile_image"
+      }
 
       assert {:ok, %Patient{} = patient} = Accounts.create_patient(valid_attrs)
       assert patient.date_of_birth == ~U[2022-08-01 10:39:00Z]
@@ -39,7 +55,16 @@ defmodule Telemedicine.AccountsTest do
 
     test "update_patient/2 with valid data updates the patient" do
       patient = patient_fixture()
-      update_attrs = %{date_of_birth: ~U[2022-08-02 10:39:00Z], first_name: "some updated first_name", gender: "some updated gender", id_birth_cert: "some updated id_birth_cert", last_name: "some updated last_name", location: "some updated location", profile_image: "some updated profile_image"}
+
+      update_attrs = %{
+        date_of_birth: ~U[2022-08-02 10:39:00Z],
+        first_name: "some updated first_name",
+        gender: "some updated gender",
+        id_birth_cert: "some updated id_birth_cert",
+        last_name: "some updated last_name",
+        location: "some updated location",
+        profile_image: "some updated profile_image"
+      }
 
       assert {:ok, %Patient{} = patient} = Accounts.update_patient(patient, update_attrs)
       assert patient.date_of_birth == ~U[2022-08-02 10:39:00Z]

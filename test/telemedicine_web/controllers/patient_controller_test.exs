@@ -23,7 +23,15 @@ defmodule TelemedicineWeb.PatientControllerTest do
     location: "some updated location",
     profile_image: "some updated profile_image"
   }
-  @invalid_attrs %{date_of_birth: nil, first_name: nil, gender: nil, id_birth_cert: nil, last_name: nil, location: nil, profile_image: nil}
+  @invalid_attrs %{
+    date_of_birth: nil,
+    first_name: nil,
+    gender: nil,
+    id_birth_cert: nil,
+    last_name: nil,
+    location: nil,
+    profile_image: nil
+  }
 
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}

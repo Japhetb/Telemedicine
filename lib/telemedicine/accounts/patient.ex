@@ -19,8 +19,23 @@ defmodule Telemedicine.Accounts.Patient do
   @doc false
   def changeset(patient, attrs) do
     patient
-    |> cast(attrs, [:first_name, :last_name, :location, :profile_image, :gender, :date_of_birth, :id_birth_cert])
-    |> validate_required([:first_name, :last_name, :location, :gender, :date_of_birth, :id_birth_cert])
+    |> cast(attrs, [
+      :first_name,
+      :last_name,
+      :location,
+      :profile_image,
+      :gender,
+      :date_of_birth,
+      :id_birth_cert
+    ])
+    |> validate_required([
+      :first_name,
+      :last_name,
+      :location,
+      :gender,
+      :date_of_birth,
+      :id_birth_cert
+    ])
     |> validate_inclusion(:gender, @gender)
     |> unique_constraint(:id_birth_cert)
   end
