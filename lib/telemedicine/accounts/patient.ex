@@ -3,7 +3,7 @@ defmodule Telemedicine.Accounts.Patient do
   import Ecto.Changeset
 
   schema "patients" do
-    field :date_of_birth, :utc_datetime
+    field :date_of_birth, :string
     field :first_name, :string
     field :gender, :string
     field :id_birth_cert, :string

@@ -11,7 +11,7 @@ defmodule TelemedicineWeb.PatientController do
     render(conn, "index.json", patients: patients)
   end
 
-  def create(conn, %{"patient" => patient_params}) do
+  def create(conn, patient_params) do
     with {:ok, %Patient{} = patient} <- Accounts.create_patient(patient_params) do
       conn
       |> put_status(:created)
