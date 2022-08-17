@@ -19,6 +19,7 @@ defmodule TelemedicineWeb.Router do
   scope "/api", TelemedicineWeb do
     pipe_through :api
     resources "/patients", PatientController, except: [:new, :edit]
+    resources "/essential", EssentialsController, except: [:new, :edit]
     post "/doctors/signup", DoctorController, :create
     post "/doctors/signin", DoctorController, :signin
   end
