@@ -41,6 +41,23 @@ defmodule Telemedicine.Medical_info do
     |> Repo.update()
   end
 
+  def fetch_record_with_pending_status(%Essentials{} = essentials) do
+    essentials
+    |> where(status: "Pending")
+    |> Repo.all()
+  end
+
+
+  def fetch_latest_record(patient_id) do
+    Essentials
+    |> where(patient_id: ^patient_id)
+    |> order_by(desc: :inserted_at)
+    |> limit(1)
+    |> Repo.get!()
+  end
+
+  # Date.diff(
+
   def delete_essentials(%Essentials{} = essentials) do
     Repo.delete(essentials)
   end
