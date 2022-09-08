@@ -11,13 +11,24 @@ defmodule TelemedicineWeb.EssentialsController do
     render(conn, "index.json", essential: essential)
   end
 
-  def create(conn, %{"essentials" => essentials_params}) do
+  def create(conn, params) do
+    essentials_params = create_essential_params(params)
+    IO.inspect(params)
     with {:ok, %Essentials{} = essentials} <- Medical_info.create_essentials(essentials_params) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.essentials_path(conn, :show, essentials))
       |> render("show.json", essentials: essentials)
     end
+  end
+
+  def create_essential_params(params) do
+    %{
+      heart_beat: %{heart_beat: params["heart_beat"]},
+    patient_id: 42,
+    pressure: %{pressure: params["pressure"]},
+    temperature: params["temperature"]
+    }
   end
 
   def show(conn, %{"id" => id}) do

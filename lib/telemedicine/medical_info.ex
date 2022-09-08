@@ -15,8 +15,7 @@ defmodule Telemedicine.Medical_info do
 
   def get_essentials!(id), do: Repo.get!(Essentials, id)
 
-  def create_essentials(%{"patient_id" => patient_id} = _attrs) do
-    attrs = get_medical_info(patient_id)
+  def create_essentials(attrs) do
 
     %Essentials{}
     |> Essentials.changeset(attrs)
@@ -24,15 +23,15 @@ defmodule Telemedicine.Medical_info do
   end
 
 
-  def get_medical_info(patient_id) do
-    path = [:code.priv_dir(:telemedicine), "python"] |> Path.join() |> to_charlist()
-    {:ok, pid} = PythonHelper.start_instance(path, 'python3')
-    temp = PythonHelper.call_instance(pid, :hello, :temp, ["World"])
-    pressure = PythonHelper.call_instance(pid, :hello, :pressure, ["World"])
-    heartbeat = PythonHelper.call_instance(pid, :hello, :heartbeat, ["World"])
+  # def get_medical_info(patient_id) do
+  #   path = [:code.priv_dir(:telemedicine), "python"] |> Path.join() |> to_charlist()
+  #   {:ok, pid} = PythonHelper.start_instance(path, 'python3')
+  #   temp = PythonHelper.call_instance(pid, :hello, :temp, ["World"])
+  #   pressure = PythonHelper.call_instance(pid, :hello, :pressure, ["World"])
+  #   heartbeat = PythonHelper.call_instance(pid, :hello, :heartbeat, ["World"])
 
-    %{"temp" => temp, "pressure" => %{pressure: pressure}, "heart_beat" => %{"heart_beat" => heartbeat}, "patient_id" => patient_id}
-  end
+  #   %{"temp" => temp, "pressure" => %{pressure: pressure}, "heart_beat" => %{"heart_beat" => heartbeat}, "patient_id" => patient_id}
+  # end
 
 
   def update_essentials(%Essentials{} = essentials, attrs) do

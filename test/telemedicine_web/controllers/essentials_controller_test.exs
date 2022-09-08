@@ -6,10 +6,10 @@ defmodule TelemedicineWeb.EssentialsControllerTest do
   alias Telemedicine.Medical_info.Essentials
 
   @create_attrs %{
-    heart_beat: %{},
-    patient_id: 42,
-    pressure: %{},
-    temperature: 42
+    "heart_beat" => %{},
+    "patient_id" => 42,
+    "pressure" => %{},
+    "temperature" => 42
   }
   @update_attrs %{
     heart_beat: %{},
@@ -32,7 +32,7 @@ defmodule TelemedicineWeb.EssentialsControllerTest do
 
   describe "create essentials" do
     test "renders essentials when data is valid", %{conn: conn} do
-      conn = post(conn, Routes.essentials_path(conn, :create), essentials: @create_attrs)
+      conn = post(conn, Routes.essentials_path(conn, :create), @create_attrs)
       assert %{"id" => id} = json_response(conn, 201)["data"]
 
       conn = get(conn, Routes.essentials_path(conn, :show, id))
